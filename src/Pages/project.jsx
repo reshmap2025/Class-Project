@@ -1,8 +1,9 @@
 function Project() {
     return (
-        <div>
-            <h1>Project Page</h1>
-        </div>
+        <>
+            <h1>Welcome to Project Page</h1>
+            
+        </>
     );
 }
 
