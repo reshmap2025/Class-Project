@@ -1,50 +1,55 @@
-import { useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
 
-function Login() {
-  // const[email, setEmail] = useState("");
-  // const[password, setPassword] = useState("");
-  const location = useLocation();
-  const [logindata, setLogindata] = useState({
-    username:" ",
-    password:" "
-  })
-  const navigate = useNavigate();
-  function handlechange(e){
-    e.preventDefault();
-    setLogindata({
-      ...logindata,
-      [e.target.name]:e.target.value
-  })
-  }
-  const formsubmit = (e) => {
-    const registerdata = location.state
-    e.preventDefault();
-    console.log("Login data", logindata)
-    console.log("Register data", registerdata)
-    if(logindata.username===registerdata.name && logindata.password===registerdata.password){
-      console.log("if success")
-      navigate("/dashboard", {
-        state: logindata
-      })
-    }else{
-      console.log("Inavalid crendentials")
-    }
-  }
-  return (
-    <>
-    {/* <input type="email" placeholder="Enter your email" required value={email} onChange={(e) => setEmail(e.target.value)} />
-    <input type="password" placeholder="Enter your password" required value={password} onChange={(e) => setPassword(e.target.value)} />
-    <button type="submit" onClick={ console.log({ email, password })}>Submit</button>
-    <button type="submit" onClick={() => print()}>Submit</button>
-    */}
-    <form onSubmit={formsubmit}>
-      <input type="text" placeholder="Enter your username" required name="username" onChange={handlechange} />
-      <input type="password" placeholder="Enter your password" required name="password" onChange={handlechange} />
-      <button type="submit">Submit</button> 
+return (
+  <div className="min-h-screen bg-sky-400 flex items-center justify-center">
+
+    <form
+      onSubmit={formsubmit}
+      className="bg-sky-100 w-96 p-10 rounded-2xl shadow-2xl flex flex-col gap-5"
+    >
+
+      <h1 className="text-3xl font-bold text-center text-blue-700">
+        Login
+      </h1>
+
+      <div className="flex flex-col gap-2">
+        <label className="text-lg font-semibold text-gray-700">
+          Username
+        </label>
+
+        <input
+          type="text"
+          placeholder="Enter your username"
+          required
+          name="username"
+          value={logindata.username}
+          onChange={handlechange}
+          className="w-full p-4 rounded-xl border-2 border-sky-300 outline-none focus:border-blue-600 focus:ring-2 focus:ring-blue-200"
+        />
+      </div>
+
+      <div className="flex flex-col gap-2">
+        <label className="text-lg font-semibold text-gray-700">
+          Password
+        </label>
+
+        <input
+          type="password"
+          placeholder="Enter your password"
+          required
+          name="password"
+          value={logindata.password}
+          onChange={handlechange}
+          className="w-full p-4 rounded-xl border-2 border-sky-300 outline-none focus:border-blue-600 focus:ring-2 focus:ring-blue-200"
+        />
+      </div>
+
+      <button
+        type="submit"
+        className="w-full bg-blue-600 text-white p-4 rounded-full font-bold hover:bg-blue-700 transition"
+      >
+        Submit
+      </button>
+
     </form>
-    </>
-    );
-}
-
-export default Login;
+  </div>
+);
